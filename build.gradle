@@ -1,0 +1,20 @@
+plugins {
+    id 'java'
+}
+
+group 'com.hkrestframework'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile 'junit:junit:4.12'
+    compile 'io.rest-assured:rest-assured:3.1.0'
+    compile 'io.rest-assured:json-schema-validator:3.1.0'
+    compile 'com.fasterxml.jackson.core:jackson-databind:2.9.6'
+
+}
