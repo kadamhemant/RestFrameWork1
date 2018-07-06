@@ -9,19 +9,36 @@ import org.junit.BeforeClass;
 
 public class TestConfig {
 
+    public static RequestSpecification videoGame_requestSpec;
+    public static RequestSpecification football_requestSpec;
+    public static ResponseSpecification responseSpec;
     @BeforeClass
     public static void setup() {
-        RestAssured.baseURI = "http://localhost";
-        RestAssured.port = 8080;
-        RestAssured.basePath = "/app/";
-        RestAssured.proxy("localhost", 8888);
+        //RestAssured.proxy("localhost", 8888);
 
-        RequestSpecification requestSpecification = new RequestSpecBuilder()
-                .addHeader("Content-Type", "application/json")
-                .addHeader("Accept", "application/json").build();
-        RestAssured.requestSpecification = requestSpecification;
+        videoGame_requestSpec=new RequestSpecBuilder().
+                setBaseUri("http://localhost").
+                setPort(8080).
+                setBasePath("/app/").
+                addHeader("Content-Type","application/json").
+                addHeader("Accept","application/json").
+                build();
 
-        ResponseSpecification responseSpecification = new ResponseSpecBuilder().expectStatusCode(200).build();
-        RestAssured.responseSpecification = responseSpecification;
-    }
+        football_requestSpec=new RequestSpecBuilder().
+                setBaseUri("http://api.football-data.org").
+                setBasePath("/v2/").
+                addHeader("X-Auth-Token","91a3d7548dae4268a1e32ab15b4d8aae").
+                addHeader("X-Response-Control","minified").
+                build();
+
+
+
+     //  RestAssured.requestSpecification=videoGame_requestSpec;
+
+        responseSpec=new ResponseSpecBuilder().
+                expectStatusCode(200).
+                build();
+     //     RestAssured.responseSpecification=videoGame_responseSpec;
+
+            }
 }
