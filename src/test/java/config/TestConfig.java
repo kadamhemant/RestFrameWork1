@@ -14,7 +14,7 @@ public class TestConfig {
     public static ResponseSpecification responseSpec;
     @BeforeClass
     public static void setup() {
-        //RestAssured.proxy("localhost", 8888);
+        RestAssured.proxy("localhost", 8888);
 
         videoGame_requestSpec=new RequestSpecBuilder().
                 setBaseUri("http://localhost").

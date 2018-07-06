@@ -1,6 +1,9 @@
 package config;
 
+import java.net.URI;
+
 public interface EndPoint {
 
-    String GET_VIDEOGAMES="/videogames";
+    String VIDEOGAMES ="/videogames";
+    String SINGLE_VIDEOGAMES = "/videogames/{videogameid}";
 }
