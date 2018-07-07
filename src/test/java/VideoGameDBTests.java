@@ -2,7 +2,9 @@ import config.EndPoint;
 import config.TestConfig;
 import org.junit.Test;
 
-import static io.restassured.RestAssured.given;
+import static io.restassured.RestAssured.*;
+import static io.restassured.matcher.RestAssuredMatchers.matchesXsdInClasspath;
+import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 
 public class VideoGameDBTests extends TestConfig {
 
@@ -56,7 +58,9 @@ public class VideoGameDBTests extends TestConfig {
     public void getsinglegame(){
 
 
-        given().spec(videoGame_requestSpec).pathParam("videogameid","18").
+        given().
+                spec(videoGame_requestSpec).
+                pathParam("videogameid","18").
          when().
                 get(EndPoint.SINGLE_VIDEOGAMES).
                 then().spec(responseSpec);
@@ -69,5 +73,37 @@ public class VideoGameDBTests extends TestConfig {
         given().spec(videoGame_requestSpec).
                 when().delete("/videogames/18").
                 then().spec(responseSpec);
+    }
+
+    @Test
+    public void testVideoGameSerialisationByJSON(){
+
+        VideoGame videoGame=new VideoGame("25","Driving","2018-07-06","Halo 7","Mature","89");
+
+        given().spec(videoGame_requestSpec).
+                body(videoGame).
+                when().
+                post(EndPoint.VIDEOGAMES).
+                then().spec(responseSpec);
+    }
+
+    @Test
+    public void testVideoGameXMLSchema(){
+        given().
+                spec(videoGame_requestSpec_XML).
+                pathParam("videogameid","18").
+                when().
+                get(EndPoint.SINGLE_VIDEOGAMES).
+                then().body(matchesXsdInClasspath("VideoGames.xsd"));
+    }
+
+    @Test
+    public void testVideoGameJsonSchema(){
+        given().
+                spec(videoGame_requestSpec).
+                pathParam("videogameid","18").
+                when().
+                get(EndPoint.SINGLE_VIDEOGAMES).
+                then().body(matchesJsonSchemaInClasspath("videogamejsonschema.json"));
     }
 }

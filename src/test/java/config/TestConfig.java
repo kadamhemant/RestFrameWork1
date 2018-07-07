@@ -10,6 +10,7 @@ import org.junit.BeforeClass;
 public class TestConfig {
 
     public static RequestSpecification videoGame_requestSpec;
+    public static RequestSpecification videoGame_requestSpec_XML;
     public static RequestSpecification football_requestSpec;
     public static ResponseSpecification responseSpec;
     @BeforeClass
@@ -22,6 +23,13 @@ public class TestConfig {
                 setBasePath("/app/").
                 addHeader("Content-Type","application/json").
                 addHeader("Accept","application/json").
+                build();
+        videoGame_requestSpec_XML=new RequestSpecBuilder().
+                setBaseUri("http://localhost").
+                setPort(8080).
+                setBasePath("/app/").
+                addHeader("Content-Type","application/xml").
+                addHeader("Accept","application/xml").
                 build();
 
         football_requestSpec=new RequestSpecBuilder().
