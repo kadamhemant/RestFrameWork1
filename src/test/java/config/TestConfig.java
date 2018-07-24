@@ -7,6 +7,8 @@ import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
 import org.junit.BeforeClass;
 
+import static org.hamcrest.Matchers.lessThan;
+
 public class TestConfig {
 
     public static RequestSpecification videoGame_requestSpec;
@@ -15,7 +17,7 @@ public class TestConfig {
     public static ResponseSpecification responseSpec;
     @BeforeClass
     public static void setup() {
-        RestAssured.proxy("localhost", 8888);
+       // RestAssured.proxy("localhost", 8888);
 
         videoGame_requestSpec=new RequestSpecBuilder().
                 setBaseUri("http://localhost").
@@ -41,12 +43,14 @@ public class TestConfig {
 
 
 
-     //  RestAssured.requestSpecification=videoGame_requestSpec;
+     RestAssured.requestSpecification=football_requestSpec;
 
         responseSpec=new ResponseSpecBuilder().
                 expectStatusCode(200).
+                expectResponseTime(lessThan(10000L)).
                 build();
      //     RestAssured.responseSpecification=videoGame_responseSpec;
+        //
 
             }
 }

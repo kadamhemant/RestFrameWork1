@@ -20,8 +20,8 @@ public class VideoGameDBTests extends TestConfig {
     public void CreateNewGame(){
 
         String gamebodyjson="{\n" +
-                "  \"id\": 18,\n" +
-                "  \"name\": \"Mygame28\",\n" +
+                "  \"id\": 19,\n" +
+                "  \"name\": \"Mygame29\",\n" +
                 "  \"releaseDate\": \"2018-07-06T00:36:12.224Z\",\n" +
                 "  \"reviewScore\": 52,\n" +
                 "  \"category\": \"Driving\",\n" +
@@ -78,7 +78,7 @@ public class VideoGameDBTests extends TestConfig {
     @Test
     public void testVideoGameSerialisationByJSON(){
 
-        VideoGame videoGame=new VideoGame("25","Driving","2018-07-06","Halo 7","Mature","89");
+        VideoGame videoGame=new VideoGame("30","Driving","2018-07-06","Halo 7","Mature","89");
 
         given().spec(videoGame_requestSpec).
                 body(videoGame).
